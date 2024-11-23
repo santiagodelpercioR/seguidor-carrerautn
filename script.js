@@ -1,3 +1,62 @@
+function crearTabla(materias) {
+    const table = document.createElement('table');
+    const tableBody = document.createElement('tbody');          
+
+    const materias1ero = filtrar(materias,1);
+    const materias2do = filtrar(materias,2);
+    const materias3ro = filtrar(materias,3);
+    const materias4to = filtrar(materias,4);
+    const materias5to = filtrar(materias,5);
+    console.log(materias1ero.length);
+    console.log(materias2do.length);
+    console.log(materias3ro.length);
+    console.log(materias4to.length);
+    console.log(materias5to.length);
+
+    const materiasPorAnio = [materias1ero, materias2do, materias3ro, materias4to, materias5to]; // 0,1,2,3,4
+
+    console.log(materiasPorAnio);
+    for (anio = 0; anio < materiasPorAnio.length; anio ++){
+        const title = document.createElement('tr');
+        const titleContent = document.createTextNode([anio+1] + 'Anio');
+        title.appendChild(titleContent);
+        table.appendChild(title);
+        console.log(materiasPorAnio[anio].length);
+        for(let i = 0; i < materiasPorAnio[anio].length;i++){
+            const row = document.createElement('tr');           // Fila
+            const cell = document.createElement('td');          // Celda
+            const cellText = document.createTextNode('hola');
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            table.appendChild(row);
+        }
+    }
+
+
+    
+
+    table.appendChild(tableBody);
+    table.setAttribute("border", "1");
+    document.body.appendChild(table);
+}
+
+function menuDesplegable() {
+    const select = document.createElement("select");
+    const opciones = ["", "Cursando", "Regularizada", "Aprobada"];
+    opciones.forEach(opcion => {
+        const optionElement = document.createElement("option");
+        optionElement.value = opcion;
+        optionElement.textContent = opcion;
+        select.appendChild(optionElement);
+    });
+    return select;
+}
+
+function filtrar(materias,anio){
+    return materias.filter(Materia =>
+        Materia.anio == anio
+    )
+}
 class Materia {
     constructor(anio, id, nombre, cursadas, aprobadas){
         this.anio = anio;
@@ -33,25 +92,5 @@ const anaNumerico = new Materia(3,22,"Análisis Numérico", [9],[1,2]);
 const disenoSistemas = new Materia(3,23,"Diseño de Sistemas de Información", [14,16],[4,6,8]);
 
 const materias = [am1,aga,fisica1,ingles1,discreta,algoritmos,arquitectura,syp,am2,fisica2,ingysoc,ingles2,ssl,pdep,so,ads,proba,economia,bases,desSoftware,comuDatos,anaNumerico,disenoSistemas];
-
-function menuDesplegable() {
-    const select = document.createElement("select");
-    const opciones = ["", "Cursando", "Regularizada", "Aprobada"];
-    opciones.forEach(opcion => {
-        const optionElement = document.createElement("option");
-        optionElement.value = opcion;
-        optionElement.textContent = opcion;
-        select.appendChild(optionElement);
-    });
-    return select;
-}
-
-function crearTabla(materias) {
-    const table = document.createElement('table');
-    const tableBody = document.createElement('tbody');
-    table.appendChild(tableBody);
-    table.setAttribute("border", "1");
-    document.body.appendChild(table);
-}
 
 crearTabla(materias);
