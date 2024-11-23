@@ -1,20 +1,17 @@
 table {
     width: 800px;
     border-collapse: collapse; 
-    margin: 20px auto; 
-    font-family: Arial, sans-serif;
+    margin: 10px; 
     font-size: 16px;
     background-color: #f9f9f9;
 }
 
-
 tbody {
-    text-align: center; 
+    text-align: left; 
 }
 
 td {
-    padding: 10px;
-    border: 1px solid #ddd; /* Borde fino */
+    padding: 5px;
 }
 
 select {
