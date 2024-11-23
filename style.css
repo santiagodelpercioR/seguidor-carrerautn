@@ -1,0 +1,26 @@
+table {
+    width: 800px;
+    border-collapse: collapse; 
+    margin: 20px auto; 
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: #f9f9f9;
+}
+
+
+tbody {
+    text-align: center; 
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Borde fino */
+}
+
+select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
