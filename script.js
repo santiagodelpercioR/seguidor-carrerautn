@@ -7,34 +7,30 @@ function crearTabla(materias) {
     const materias3ro = filtrar(materias,3);
     const materias4to = filtrar(materias,4);
     const materias5to = filtrar(materias,5);
-    console.log(materias1ero.length);
-    console.log(materias2do.length);
-    console.log(materias3ro.length);
-    console.log(materias4to.length);
-    console.log(materias5to.length);
 
     const materiasPorAnio = [materias1ero, materias2do, materias3ro, materias4to, materias5to]; // 0,1,2,3,4
+    const anios = materiasPorAnio.length;
 
-    console.log(materiasPorAnio);
-    for (anio = 0; anio < materiasPorAnio.length; anio ++){
+    // Recorre el for 1 vez por año
+    for (let i = 0; i < anios; i ++){
         const title = document.createElement('tr');
-        const titleContent = document.createTextNode([anio+1] + 'Anio');
+        const titleContent = document.createTextNode([i+1] + '° Año');
         title.appendChild(titleContent);
         table.appendChild(title);
-        console.log(materiasPorAnio[anio].length);
-        for(let i = 0; i < materiasPorAnio[anio].length;i++){
+        
+        materiasDelAnio = materiasPorAnio[i];
+        let cantMateriasDelAnio = materiasDelAnio.length;
+        for(let x = 0; x < cantMateriasDelAnio; x ++){
             const row = document.createElement('tr');           // Fila
             const cell = document.createElement('td');          // Celda
-            const cellText = document.createTextNode('hola');
+            const cellText = document.createTextNode(materiasDelAnio[x].nombre);
+            const select = menuDesplegable();
             cell.appendChild(cellText);
             row.appendChild(cell);
+            row.appendChild(select);
             table.appendChild(row);
         }
     }
-
-
-    
-
     table.appendChild(tableBody);
     table.setAttribute("border", "1");
     document.body.appendChild(table);
