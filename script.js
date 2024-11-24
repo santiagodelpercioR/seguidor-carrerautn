@@ -22,6 +22,7 @@ function crearTabla(materias) {
         let cantMateriasDelAnio = materiasDelAnio.length;
         for(let x = 0; x < cantMateriasDelAnio; x ++){
             const row = document.createElement('tr');           // Fila
+            row.setAttribute("class",'materia');
             const cell = document.createElement('td');          // Celda
             const cellText = document.createTextNode(materiasDelAnio[x].nombre);
             const select = menuDesplegable();
@@ -53,6 +54,46 @@ function filtrar(materias,anio){
         Materia.anio == anio
     )
 }
+
+function escucharOpciones(){
+    const selects = document.querySelectorAll("select");
+    selects.forEach(select => 
+        select.addEventListener("change", function(){
+            let options = select.querySelectorAll('option');
+            let count = options.length;
+            verificarCorrelatividades();
+        })
+    );
+
+}
+
+function verificarCorrelatividades(){
+    console.log("tengo que verificar correlatividades");
+    const materias = document.querySelectorAll("tr.materia");
+    console.log(materias);
+    
+    const nombres = Array.from(materias).map(fila =>{
+        const nombreMateria = fila.querySelector('td');
+        return nombreMateria ? nombreMateria.textContent.trim() : '';
+    })
+    console.log(nombres);
+    //materias.forEach(materia => console.log(materia.innerHtml))
+    
+    /*
+    Para cada una de las materias:
+    - La encuentro y extraigo el nombre.
+    - busco ese nombre en mi array de materias.
+    - me fijo sus correlatividades.
+
+
+    Si una materia no tiene correlatividades, esta desbloqueada
+    Si una materia tiene correlatividades, las chequeo:
+        - Si esta habilitada, la desbloqueo.
+        - Si esta deshabilitada, la bloqueo.
+    */
+
+}
+
 class Materia {
     constructor(anio, id, nombre, cursadas, aprobadas){
         this.anio = anio;
@@ -90,3 +131,6 @@ const disenoSistemas = new Materia(3,23,"Diseño de Sistemas de Información", [
 const materias = [am1,aga,fisica1,ingles1,discreta,algoritmos,arquitectura,syp,am2,fisica2,ingysoc,ingles2,ssl,pdep,so,ads,proba,economia,bases,desSoftware,comuDatos,anaNumerico,disenoSistemas];
 
 crearTabla(materias);
+
+verificarCorrelatividades();
+escucharOpciones();
