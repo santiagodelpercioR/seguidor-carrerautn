@@ -72,11 +72,11 @@ function verificarCorrelatividades(){
     const materias = document.querySelectorAll("tr.materia");
     console.log(materias);
     
-    const nombres = Array.from(materias).map(fila =>{
-        const nombreMateria = fila.querySelector('td');
-        return nombreMateria ? nombreMateria.textContent.trim() : '';
+    const estados = Array.from(materias).map(fila =>{
+        const estado = fila.querySelector('select');
+        return estado.value ;
     })
-    console.log(nombres);
+    console.log(estados);
     //materias.forEach(materia => console.log(materia.innerHtml))
     
     /*
