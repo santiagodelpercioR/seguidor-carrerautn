@@ -1,54 +1,10 @@
-function crearTabla(materias) {
-             
-
-    const materias1ero = filtrar(materias,1);
-    const materias2do = filtrar(materias,2);
-    const materias3ro = filtrar(materias,3);
-    const materias4to = filtrar(materias,4);
-    const materias5to = filtrar(materias,5);
-
-    const materiasPorAnio = [materias1ero, materias2do, materias3ro, materias4to, materias5to]; // 0,1,2,3,4
-    const anios = materiasPorAnio.length;
-
-    // Recorre el for 1 vez por año
-    for (let i = 0; i < anios; i ++){
-        const table = document.createElement('table');
-        const tableBody = document.createElement('tbody'); 
-        const title = document.createElement('tr');
-        const titleContent = document.createTextNode([i+1] + '° Año');
-        title.appendChild(titleContent);
-        table.appendChild(title);
-        
-        materiasDelAnio = materiasPorAnio[i];
-        let cantMateriasDelAnio = materiasDelAnio.length;
-        for(let x = 0; x < cantMateriasDelAnio; x ++){
-            const row = document.createElement('tr');           // Fila
-            row.setAttribute("class",'materia');
-            const cell = document.createElement('td');          // Celda
-            const cellText = document.createTextNode(materiasDelAnio[x].nombre);
-            const select = menuDesplegable();
-            cell.appendChild(cellText);
-            row.appendChild(cell);
-            row.appendChild(select);
-            table.appendChild(row);
-        }
-        table.appendChild(tableBody);
-        table.setAttribute("border", "1");
-        document.body.appendChild(table);
+class Materia {
+    constructor(anio, id, nombre, requisitos = {cursadas: [], aprobadas: []}){
+        this.anio = anio;
+        this.id = id;
+        this.nombre = nombre;
+        this.requisitos = requisitos;
     }
-    
-}
-
-function menuDesplegable() {
-    const select = document.createElement("select");
-    const opciones = ["", "Cursando", "Regularizada", "Aprobada"];
-    opciones.forEach(opcion => {
-        const optionElement = document.createElement("option");
-        optionElement.value = opcion;
-        optionElement.textContent = opcion;
-        select.appendChild(optionElement);
-    });
-    return select;
 }
 
 function filtrar(materias,anio){
@@ -57,22 +13,74 @@ function filtrar(materias,anio){
     )
 }
 
-function escucharOpciones(){
-    const selects = document.querySelectorAll("select");
-    selects.forEach(select => 
-        select.addEventListener("change", function(){
-            let options = select.querySelectorAll('option');
-            let count = options.length;
-        })
-    );
+function crearTabla(materias) {
+    const materiasPorAnio = [
+        filtrar(materias, 1),
+        filtrar(materias, 2),
+        filtrar(materias, 3),
+        filtrar(materias, 4),
+        filtrar(materias, 5)
+    ];
+    const anios = materiasPorAnio.length;
+
+    // Recorre el for 1 vez por año
+    materiasPorAnio.forEach((materiasDelAnio, index) => {
+        const table = document.createElement('table');
+        const tableBody = document.createElement('tbody');
+
+        // Crear encabezado de la tabla
+        const titleRow = document.createElement('tr');
+        const titleCell = document.createElement('td');
+        titleCell.textContent = `${index + 1}° Año`;
+        titleCell.setAttribute('colspan', '2');
+        titleCell.style.textAlign = "center";
+        titleCell.style.fontWeight = "bold";
+        titleRow.appendChild(titleCell);
+        tableBody.appendChild(titleRow);
+
+        // Crear filas de materias
+        materiasDelAnio.forEach(materia => {
+            const row = document.createElement('tr');
+            row.classList.add('materia', 'sinEstado');
+
+            // Celda con el nombre de la materia
+            const nameCell = document.createElement('td');
+            nameCell.textContent = materia.nombre;
+            row.appendChild(nameCell);
+
+            // Celda con el menú desplegable
+            const selectCell = document.createElement('td');
+            const select = menuDesplegable();
+            selectCell.appendChild(select);
+            row.appendChild(selectCell);
+
+            tableBody.appendChild(row);
+        });
+
+        table.appendChild(tableBody);
+        table.setAttribute("border", "1");
+        document.body.appendChild(table);
+    });
 }
-class Materia {
-    constructor(anio, id, nombre, requisitos = {cursadas: [], aprobadas: []}){
-        this.anio = anio;
-        this.id = id;
-        this.nombre = nombre;
-        this.requisitos = requisitos;
-    }
+
+function menuDesplegable() {
+    const select = document.createElement("select");
+    const opciones = ["", "Cursando", "Regularizada", "Aprobada"];
+
+    opciones.forEach(opcion => {
+        const optionElement = document.createElement("option");
+        optionElement.value = opcion;
+        optionElement.textContent = opcion;
+        select.appendChild(optionElement);
+    });
+
+    select.addEventListener("change", function () {
+                const tr = select.closest("tr");
+                tr.classList.remove("cursando", "aprobada", "regularizada", "sinEstado");
+                tr.classList.add(select.value.toLowerCase() || "sinEstado");
+            });
+
+    return select;
 }
 
 const materias = [
@@ -117,6 +125,4 @@ const materias = [
 const materiasRegularizadas = [];
 const materiasAprobadas = [];
 
-console.log(materias);
 crearTabla(materias);
-escucharOpciones();
