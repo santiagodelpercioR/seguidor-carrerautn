@@ -1,6 +1,5 @@
 function crearTabla(materias) {
-    const table = document.createElement('table');
-    const tableBody = document.createElement('tbody');          
+             
 
     const materias1ero = filtrar(materias,1);
     const materias2do = filtrar(materias,2);
@@ -13,6 +12,8 @@ function crearTabla(materias) {
 
     // Recorre el for 1 vez por año
     for (let i = 0; i < anios; i ++){
+        const table = document.createElement('table');
+        const tableBody = document.createElement('tbody'); 
         const title = document.createElement('tr');
         const titleContent = document.createTextNode([i+1] + '° Año');
         title.appendChild(titleContent);
@@ -31,10 +32,11 @@ function crearTabla(materias) {
             row.appendChild(select);
             table.appendChild(row);
         }
+        table.appendChild(tableBody);
+        table.setAttribute("border", "1");
+        document.body.appendChild(table);
     }
-    table.appendChild(tableBody);
-    table.setAttribute("border", "1");
-    document.body.appendChild(table);
+    
 }
 
 function menuDesplegable() {

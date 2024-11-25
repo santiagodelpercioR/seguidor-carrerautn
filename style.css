@@ -10,6 +10,10 @@ table {
     border-radius: 3px;
 }
 
+.materia {
+    background-color: rgb(226, 71, 71);
+}
+
 tr{
     background-color: rgb(252, 252, 252);
 }
