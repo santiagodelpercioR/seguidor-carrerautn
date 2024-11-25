@@ -75,10 +75,10 @@ function menuDesplegable() {
     });
 
     select.addEventListener("change", function () {
-                const tr = select.closest("tr");
-                tr.classList.remove("cursando", "aprobada", "regularizada", "sinEstado");
-                tr.classList.add(select.value.toLowerCase() || "sinEstado");
-            });
+            const tr = select.closest("tr");
+            tr.classList.remove("cursando", "aprobada", "regularizada", "sinEstado");
+            tr.classList.add(select.value.toLowerCase() || "sinEstado");
+        });
 
     return select;
 }

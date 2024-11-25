@@ -49,18 +49,18 @@ select {
     border-radius: 3px;
 }
 
-tr.materia.cursando {
+tr.materia.cursando td, tr.materia.cursando select {
     background-color: #0f76e0; 
 }
 
-tr.materia.aprobada {
+tr.materia.aprobada td, tr.materia.aprobada select {
     background-color: #a8e014; 
 }
 
-tr.materia.regularizada {
+tr.materia.regularizada td, tr.materia.regularizada select {
     background-color: #edd316; 
 }
 
-tr.materia.sinEstado {
+tr.materia.sinEstado td, tr.materia.sinEstado td {
     background-color: #a8a6a6; /* Gris para sin estado */
 }
