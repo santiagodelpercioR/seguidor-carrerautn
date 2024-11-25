@@ -1,5 +1,8 @@
 body{
     background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 table {
@@ -10,9 +13,9 @@ table {
     border-radius: 3px;
 }
 
-.materia {
+/*.materia td{
     background-color: rgb(226, 71, 71);
-}
+}*/
 
 tr{
     background-color: rgb(252, 252, 252);
