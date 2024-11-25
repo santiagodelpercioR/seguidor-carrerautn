@@ -77,10 +77,38 @@ function menuDesplegable() {
     select.addEventListener("change", function () {
             const tr = select.closest("tr");
             tr.classList.remove("cursando", "aprobada", "regularizada", "sinEstado");
-            tr.classList.add(select.value.toLowerCase() || "sinEstado");
+            const value = select.value.toLowerCase();
+            tr.classList.add(value || "sinEstado");
+            actualizarEstado(value,tr);
         });
 
     return select;
+}
+
+function actualizarEstado(estado, tr){
+    console.log(tr.cells[0].textContent + ' ahora tiene el estado ' + estado)
+    let nombreMateria = tr.cells[0].textContent;
+    let materiaABuscar = materias.filter(materia => { return materia.nombre === nombreMateria})
+    let idMateria = materiaABuscar[0].id;
+    console.log(idMateria);
+    if(estado === "Cursando"){
+        materiasCursando.push(idMateria);
+        console.log(materiasCursando);
+    }
+    else if(estado === "Regularizada"){
+        materiasRegularizadas.push(idMateria);
+    }
+    else if(estado === "Aprobada"){
+        materiasAprobadas.push(idMateria);
+    }
+    removerDuplicados();
+    console.log(materiasCursando);
+}
+
+function removerDuplicados(){
+    materiasCursando = [... new Set(materiasCursando)];
+    materiasRegularizadas = [... new Set(materiasRegularizadas)];
+    materiasAprobadas = [... new Set(materiasAprobadas)];
 }
 
 const materias = [
@@ -99,7 +127,7 @@ const materias = [
     new Materia(2,13,"Sintaxis y Semántica de los Lenguajes", {cursadas: [5,6]}),
     new Materia(2,14,"Paradigmas de Programación",{cursadas: [5,6]}),
     new Materia(2,15,"Sistemas Operativos", {cursadas: [7]}),
-    new Materia(2,16,"Paradigmas de Programación",{cursadas: [6,8]}),
+    new Materia(2,16,"Análisis de Sistemas de Información",{cursadas: [6,8]}),
     new Materia(3,17,"Probabilidad y Estadística", {cursadas: [1,2]}),
     new Materia(3,18,"Economía",{aprobadas: [1,2]}),
     new Materia(3,19,"Bases de Datos", {cursadas: [13,16], aprobadas: [5,6]}),
@@ -122,7 +150,8 @@ const materias = [
     new Materia(5,36,"Proyecto Final", {cursadas: [25,26,30], aprobadas:[12,20,23]}),
 ];
 
-const materiasRegularizadas = [];
-const materiasAprobadas = [];
+let materiasCursando = [];
+let materiasRegularizadas = [];
+let materiasAprobadas = [];
 
 crearTabla(materias);
