@@ -1,9 +1,17 @@
+body{
+    background-color: rgb(255, 255, 255);
+}
+
 table {
-    width: 800px;
-    border-collapse: collapse; 
-    margin: 10px; 
+    width: 500px;
+    margin: 0px; 
     font-size: 16px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
+    border-radius: 3px;
+}
+
+tr{
+    background-color: rgb(252, 252, 252);
 }
 
 tbody {

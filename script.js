@@ -51,7 +51,7 @@ function menuDesplegable() {
 
 function filtrar(materias,anio){
     return materias.filter(Materia =>
-        Materia.anio == anio
+        Materia.anio == anio,
     )
 }
 
@@ -61,76 +61,47 @@ function escucharOpciones(){
         select.addEventListener("change", function(){
             let options = select.querySelectorAll('option');
             let count = options.length;
-            verificarCorrelatividades();
         })
     );
-
 }
-
-function verificarCorrelatividades(){
-    console.log("tengo que verificar correlatividades");
-    const materias = document.querySelectorAll("tr.materia");
-    console.log(materias);
-    
-    const estados = Array.from(materias).map(fila =>{
-        const estado = fila.querySelector('select');
-        return estado.value ;
-    })
-    console.log(estados);
-    //materias.forEach(materia => console.log(materia.innerHtml))
-    
-    /*
-    Para cada una de las materias:
-    - La encuentro y extraigo el nombre.
-    - busco ese nombre en mi array de materias.
-    - me fijo sus correlatividades.
-
-
-    Si una materia no tiene correlatividades, esta desbloqueada
-    Si una materia tiene correlatividades, las chequeo:
-        - Si esta habilitada, la desbloqueo.
-        - Si esta deshabilitada, la bloqueo.
-    */
-
-}
-
 class Materia {
-    constructor(anio, id, nombre, cursadas, aprobadas){
+    constructor(anio, id, nombre, requisitos = {cursadas: [], aprobadas: []}){
         this.anio = anio;
         this.id = id;
         this.nombre = nombre;
-        this.cursadas = cursadas;
-        this.aprobadas = aprobadas;
+        this.requisitos = requisitos;
     }
 }
 
-const am1 = new Materia(1,1,"Análisis Matemático I", [],[]);
-const aga = new Materia(1,2,"Álgebra y Geometría Analítica", [],[]);
-const fisica1 = new Materia(1,3,"Fisica I", [],[]);
-const ingles1 = new Materia(1,4,"Inglés I", [],[]);
-const discreta = new Materia(1,5,"Lógica y Estructuras Discretas", [],[]);
-const algoritmos = new Materia(1,6,"Algoritmos y Estructuras de Datos", [],[]);
-const arquitectura = new Materia(1,7,"Arquitectura de Computadoras", [],[]);
-const syp = new Materia(1,8,"Sistemas y Procesos de Negocio", [],[]);
-const am2 = new Materia(2,9,"Análisis Matemático II", [1,2],[]);
-const fisica2 = new Materia(2,10,"Fisica II", [1,3],[]);
-const ingysoc = new Materia(2,11,"Ingeniería y Sociedad", [],[]);
-const ingles2 = new Materia(2,12,"Inglés II", [4],[]);
-const ssl = new Materia(2,13,"Sintaxis y Semántica de los Lenguajes", [5,6],[]);
-const pdep = new Materia(2,14,"Paradigmas de Programación", [5,6],[]);
-const so = new Materia(2,15,"Sistemas Operativos", [7],[]);
-const ads = new Materia(2,16,"Paradigmas de Programación", [6,8],[]);
-const proba = new Materia(3,17,"Probabilidad y Estadística", [1,2],[]);
-const economia = new Materia(3,18,"Economía", [],[1,2]);
-const bases = new Materia(3,19,"Bases de Datos", [13,16],[5,6]);
-const desSoftware = new Materia(3,20,"Desarrollo de Software", [14,16],[5,6]);
-const comuDatos = new Materia(3,21,"Comunicación de Datos", [],[3,7]);
-const anaNumerico = new Materia(3,22,"Análisis Numérico", [9],[1,2]);
-const disenoSistemas = new Materia(3,23,"Diseño de Sistemas de Información", [14,16],[4,6,8]);
+const materias = [
+    new Materia(1,1,"Análisis Matemático I"),
+    new Materia(1,2,"Álgebra y Geometría Analítica"),
+    new Materia(1,3,"Fisica I"),
+    new Materia(1,4,"Inglés I"),
+    new Materia(1,5,"Lógica y Estructuras Discretas"),
+    new Materia(1,6,"Algoritmos y Estructuras de Datos"),
+    new Materia(1,7,"Arquitectura de Computadoras"),
+    new Materia(1,8,"Sistemas y Procesos de Negocio"),
+    new Materia(2,9,"Análisis Matemático II",{cursadas: [1,2]}),
+    new Materia(2,10,"Fisica II", {cursadas: [1,3]}),
+    new Materia(2,11,"Ingeniería y Sociedad"),
+    new Materia(2,12,"Inglés II", {cursadas: [4]}),
+    new Materia(2,13,"Sintaxis y Semántica de los Lenguajes", {cursadas: [5,6]}),
+    new Materia(2,14,"Paradigmas de Programación",{cursadas: [5,6]}),
+    new Materia(2,15,"Sistemas Operativos", {cursadas: [7]}),
+    new Materia(2,16,"Paradigmas de Programación",{cursadas: [6,8]}),
+    new Materia(3,17,"Probabilidad y Estadística", {cursadas: [1,2]}),
+    new Materia(3,18,"Economía",{aprobadas: [1,2]}),
+    new Materia(3,19,"Bases de Datos", {cursadas: [13,16], aprobadas: [5,6]}),
+    new Materia(3,20,"Desarrollo de Software", {cursadas: [14,16], aprobadas: [5,6]}),
+    new Materia(3,21,"Comunicación de Datos", {cursadas: [], aprobadas: [3,7]}),
+    new Materia(3,22,"Análisis Numérico", {cursadas: [9], aprobadas: [1,2]}),
+    new Materia(3,23,"Diseño de Sistemas de Información", {cursadas: [14,16], aprobadas: [4,6,8]}),
+];
 
-const materias = [am1,aga,fisica1,ingles1,discreta,algoritmos,arquitectura,syp,am2,fisica2,ingysoc,ingles2,ssl,pdep,so,ads,proba,economia,bases,desSoftware,comuDatos,anaNumerico,disenoSistemas];
+const materiasRegularizadas = [];
+const materiasAprobadas = [];
 
+console.log(materias);
 crearTabla(materias);
-
-verificarCorrelatividades();
 escucharOpciones();
