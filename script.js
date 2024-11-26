@@ -85,24 +85,37 @@ function menuDesplegable() {
     return select;
 }
 
+function eliminarEstado(id, lista1, lista2){
+    let index = lista1.indexOf(id);
+    if(index > -1){
+        lista1.splice(index,1);
+    }
+    index = lista2.indexOf(id);
+    if(index > -1){
+        lista2.splice(index,1);
+    }
+}
+
 function actualizarEstado(estado, tr){
-    console.log(tr.cells[0].textContent + ' ahora tiene el estado ' + estado)
     let nombreMateria = tr.cells[0].textContent;
     let materiaABuscar = materias.filter(materia => { return materia.nombre === nombreMateria})
-    let idMateria = materiaABuscar[0].id;
-    console.log(idMateria);
-    if(estado === "Cursando"){
+    const idMateria = materiaABuscar[0].id;
+    if(estado === "cursando"){
         materiasCursando.push(idMateria);
-        console.log(materiasCursando);
+        eliminarEstado(idMateria, materiasRegularizadas, materiasAprobadas);
     }
-    else if(estado === "Regularizada"){
+    else if(estado === "regularizada"){
         materiasRegularizadas.push(idMateria);
+        eliminarEstado(idMateria, materiasCursando, materiasAprobadas);
     }
-    else if(estado === "Aprobada"){
+    else if(estado === "aprobada"){
         materiasAprobadas.push(idMateria);
+        eliminarEstado(idMateria, materiasCursando, materiasRegularizadas);
     }
     removerDuplicados();
-    console.log(materiasCursando);
+    console.log('materias cursando: ' + materiasCursando);
+    console.log('materias regularizadas: ' + materiasRegularizadas);
+    console.log('materias aprobadas: ' + materiasAprobadas)
 }
 
 function removerDuplicados(){
