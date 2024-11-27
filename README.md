@@ -20,8 +20,6 @@ Este proyecto facilitaría la planificación académica al mostrar el recorrido 
   Cada año tiene su propia tabla con una lista desplegable para cada materia, organizada de manera clara y fácil de usar.
 
 ## Limitaciones actuales
-- Sin persistencia:
-  Los datos seleccionados no se guardan al refrescar la página, ya que aún no se implementó la funcionalidad de Local Storage.
 - Foco en una carrera:
   Actualmente, está diseñado solo para Ingeniería en Sistemas de Información. Se planea agregar soporte para otras carreras en el futuro.
 
@@ -45,8 +43,7 @@ El uso es completamente intuitivo:
 ## Próximos pasos
 En futuras versiones se planea agregar:
 
-- Local Storage para guardar los datos ingresados.
-- Inicio de sesión para gestionar información personalizada.
 - Selección de carrera para incluir otros planes académicos.
-- Gestión de legajos, parciales y fechas de finales.
 - Implementación de materias electivas.
+- Inicio de sesión para gestionar información personalizada.
+- Gestión de legajos, parciales y fechas de finales.
