@@ -138,7 +138,8 @@ function verificarCorrelatividades(materia){
     // si cursadas esta en el array de materiasRegularizadas y aprobadas esta en el array de materiasAprobadas, devuelvo true
     let reqCursadas = materia[0].requisitos.cursadas;
     let reqAprobadas = materia[0].requisitos.aprobadas;
-    if((hasSubArray(materiasRegularizadas,reqCursadas) || hasSubArray(materiasAprobadas,reqCursadas)) && hasSubArray(materiasAprobadas, reqAprobadas)){
+    
+    if( ( reqCursadas.every(cursadaOAprobada)) && reqAprobadas.every(materiasAprobadas.includes)){
         return true;
     }
     else{
@@ -146,8 +147,13 @@ function verificarCorrelatividades(materia){
     }
 }
 
-function hasSubArray(master, sub) {
-    return sub.every((i => v => i = master.indexOf(v, i) + 1)(0));
+function cursadaOAprobada(materia){
+    if(materiasRegularizadas.includes(materia) || materiasAprobadas.includes(materia)){
+        return true;
+    }
+    else{ 
+        return false;
+    }
 }
 
 const materias = [
