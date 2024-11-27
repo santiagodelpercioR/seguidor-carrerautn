@@ -79,7 +79,7 @@ function menuDesplegable() {
             tr.classList.remove("cursando", "aprobada", "regularizada", "sinEstado");
             const value = select.value.toLowerCase();
             tr.classList.add(value || "sinEstado");
-            actualizarEstado(value,tr);
+            actualizarEstado(value,tr,select);
         });
 
     return select;
@@ -96,23 +96,32 @@ function eliminarEstado(id, lista1, lista2){
     }
 }
 
-function actualizarEstado(estado, tr){
+function actualizarEstado(estado, tr,option){
     let nombreMateria = tr.cells[0].textContent;
     let materiaABuscar = materias.filter(materia => { return materia.nombre === nombreMateria})
     const idMateria = materiaABuscar[0].id;
-    if(estado === "cursando"){
-        materiasCursando.push(idMateria);
-        eliminarEstado(idMateria, materiasRegularizadas, materiasAprobadas);
+    let puedeCursar = verificarCorrelatividades(materiaABuscar);
+    if(!puedeCursar){
+        console.log('no se puede cursar: ' + nombreMateria);
+        tr.classList.remove("cursando", "aprobada", "regularizada", "sinEstado");
+        tr.classList.add("sinEstado");
+        option.value = 'nada';
     }
-    else if(estado === "regularizada"){
-        materiasRegularizadas.push(idMateria);
-        eliminarEstado(idMateria, materiasCursando, materiasAprobadas);
+    else{
+        if(estado === "cursando"){
+            materiasCursando.push(idMateria);
+            eliminarEstado(idMateria, materiasRegularizadas, materiasAprobadas);
+        }
+        else if(estado === "regularizada"){
+            materiasRegularizadas.push(idMateria);
+            eliminarEstado(idMateria, materiasCursando, materiasAprobadas);
+        }
+        else if(estado === "aprobada"){
+            materiasAprobadas.push(idMateria);
+            eliminarEstado(idMateria, materiasCursando, materiasRegularizadas);
+        }
+        removerDuplicados();
     }
-    else if(estado === "aprobada"){
-        materiasAprobadas.push(idMateria);
-        eliminarEstado(idMateria, materiasCursando, materiasRegularizadas);
-    }
-    removerDuplicados();
     console.log('materias cursando: ' + materiasCursando);
     console.log('materias regularizadas: ' + materiasRegularizadas);
     console.log('materias aprobadas: ' + materiasAprobadas)
@@ -122,6 +131,23 @@ function removerDuplicados(){
     materiasCursando = [... new Set(materiasCursando)];
     materiasRegularizadas = [... new Set(materiasRegularizadas)];
     materiasAprobadas = [... new Set(materiasAprobadas)];
+}
+
+function verificarCorrelatividades(materia){
+    // una materia tiene cursadas [] y aprobadas []
+    // si cursadas esta en el array de materiasRegularizadas y aprobadas esta en el array de materiasAprobadas, devuelvo true
+    let reqCursadas = materia[0].requisitos.cursadas;
+    let reqAprobadas = materia[0].requisitos.aprobadas;
+    if((hasSubArray(materiasRegularizadas,reqCursadas) || hasSubArray(materiasAprobadas,reqCursadas)) && hasSubArray(materiasAprobadas, reqAprobadas)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function hasSubArray(master, sub) {
+    return sub.every((i => v => i = master.indexOf(v, i) + 1)(0));
 }
 
 const materias = [
