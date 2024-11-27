@@ -35,6 +35,7 @@ Este proyecto fue desarrollado utilizando:
 
 Podés probar la versión actual en el siguiente enlace:
 https://santiagodelpercior.github.io/seguidor-carrerautn/
+
 El uso es completamente intuitivo:
 
 1. Seleccioná materias desde las listas desplegables.
