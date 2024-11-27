@@ -1,9 +1,9 @@
-# Versión 1.0 - Seguidor Carrera UTN
+# Seguidor Carrera UTN
 
 ## Propósito
 
-Seguidor Carrera UTN está diseñado para ayudar a los estudiantes de la UTN a visualizar su progreso en la carrera de Ingeniería en Sistemas de Información.
-Este proyecto facilita la planificación académica al mostrar el recorrido de la carrera y ofrecer herramientas para decidir qué materias cursar o qué finales rendir según las correlatividades.
+Seguidor Carrera UTN está siendo diseñado para ayudar a los estudiantes de la UTN a visualizar su progreso en sus respectivas carreras.
+Este proyecto facilitaría la planificación académica al mostrar el recorrido de la carrera y ofrecer herramientas para decidir qué materias cursar o qué finales rendir según las correlatividades.
 
 ## Funcionalidades actuales
 
@@ -26,7 +26,7 @@ Este proyecto facilita la planificación académica al mostrar el recorrido de l
   Actualmente, está diseñado solo para Ingeniería en Sistemas de Información. Se planea agregar soporte para otras carreras en el futuro.
 
 ## Tecnologías utilizadas
-Este proyecto fue desarrollado utilizando:
+Este proyecto está siendo desarrollado con:
 - HTML
 - CSS
 - JavaScript
@@ -34,7 +34,7 @@ Este proyecto fue desarrollado utilizando:
 ## Uso
 
 Podés probar la versión actual en el siguiente enlace:
-https://santiagodelpercior.github.io/seguidor-carrerautn/
+[seguidor-carreraUTN](https://santiagodelpercior.github.io/seguidor-carrerautn/)
 
 El uso es completamente intuitivo:
 
