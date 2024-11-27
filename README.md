@@ -34,8 +34,7 @@ Este proyecto fue desarrollado utilizando:
 ## Uso
 
 Podés probar la versión actual en el siguiente enlace:
-[Seguidor Carrera UTN]([url](https://santiagodelpercior.github.io/seguidor-carrerautn/))
-
+https://santiagodelpercior.github.io/seguidor-carrerautn/
 El uso es completamente intuitivo:
 
 1. Seleccioná materias desde las listas desplegables.
