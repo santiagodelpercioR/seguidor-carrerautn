@@ -134,28 +134,47 @@ function removerDuplicados(){
 }
 
 function verificarCorrelatividades(materia){
-    // una materia tiene cursadas [] y aprobadas []
-    // si cursadas esta en el array de materiasRegularizadas y aprobadas esta en el array de materiasAprobadas, devuelvo true
-    let reqCursadas = materia[0].requisitos.cursadas;
-    let reqAprobadas = materia[0].requisitos.aprobadas;
+    const reqCursadas = materia[0].requisitos.cursadas || [];
+    const reqAprobadas = materia[0].requisitos.aprobadas || [];
+    console.log('reqCursadas son ' + reqCursadas);
+    console.log('reqAprobadas son ' + reqAprobadas);
+
+    const cursadasCumplidas = reqCursadas.every(materia => cursadaOAprobada(materia));
+    const aprobadasCumplidas = reqAprobadas.every(materia => materiasAprobadas.includes(materia));
     
-    if( ( reqCursadas.every(cursadaOAprobada)) && reqAprobadas.every(materiasAprobadas.includes)){
+    if( cursadasCumplidas && aprobadasCumplidas){
         return true;
     }
-    else{
-        return false;
+
+    const faltantesCursadas = reqCursadas.filter(x => !materiasRegularizadas.includes(x) && !materiasAprobadas.includes(x));
+    const faltantesAprobadas = reqAprobadas.filter(x => !materiasAprobadas.includes(x));
+
+
+    let materiasFaltantes = [];
+    if(faltantesCursadas.length > 0){
+        faltantesCursadas.forEach((id) => {
+            let materia = materias.find(materia => materia.id === id);
+            let nombreMateria = materia.nombre;
+            materiasFaltantes.push(nombreMateria);
+        })
+        alert(`Te falta regularizar: ${materiasFaltantes}`);
     }
+    if (faltantesAprobadas.length > 0) {
+        materiasFaltantes = [];
+        faltantesAprobadas.forEach((id) => {
+            let materia = materias.find(materia => materia.id === id);
+            let nombreMateria = materia.nombre;
+            materiasFaltantes.push(nombreMateria);
+        })
+        alert(`Te falta aprobar: ${materiasFaltantes}`);
+    }
+
+    return false;
 }
 
 function cursadaOAprobada(materia){
-    if(materiasRegularizadas.includes(materia) || materiasAprobadas.includes(materia)){
-        return true;
-    }
-    else{ 
-        return false;
-    }
+    return materiasRegularizadas.includes(materia) || materiasAprobadas.includes(materia);
 }
-
 const materias = [
     new Materia(1,1,"Análisis Matemático I"),
     new Materia(1,2,"Álgebra y Geometría Analítica"),
