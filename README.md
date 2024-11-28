@@ -36,7 +36,7 @@ Podés probar la versión actual en el siguiente enlace:
 
 El uso es completamente intuitivo:
 
-1. Seleccioná materias desde las listas desplegables.
+1. Seleccioná el estado de tus materias desde las listas desplegables.
 2. Observá cómo cambian los colores según el estado de la materia.
 3. Si seleccionás una materia sin cumplir sus correlatividades, el sistema te indicará los requisitos necesarios.
 
