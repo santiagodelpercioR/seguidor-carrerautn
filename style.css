@@ -89,3 +89,9 @@ tr.materia.regularizada td, tr.materia.regularizada select {
 tr.materia.sinEstado td, tr.materia.sinEstado td {
     background-color: #a8a6a6; /* Gris para sin estado */
 }
+
+#resetButton{
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+}

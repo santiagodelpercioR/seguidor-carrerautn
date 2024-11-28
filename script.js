@@ -6,7 +6,7 @@ function filtrar(materias,anio){
     )
 }
 
-function crearTabla(materias) {
+function crearTablas(materias) {
     const materiasPorAnio = [
         filtrar(materias, 1),
         filtrar(materias, 2),
@@ -16,6 +16,7 @@ function crearTabla(materias) {
     ];
     const anios = materiasPorAnio.length;
     const main = document.createElement('main');
+    main.setAttribute('id','main');
 
     // Recorre el for 1 vez por año
     materiasPorAnio.forEach((materiasDelAnio, index) => {
@@ -208,9 +209,25 @@ function cursadaOAprobada(materia){
     return materiasRegularizadas.includes(materia) || materiasAprobadas.includes(materia);
 }
 
+function eliminarTablas(){
+    const main = document.getElementById('main');
+    document.body.removeChild(main);
+    materiasCursando = [];
+    materiasRegularizadas = [];
+    materiasAprobadas = [];
+    }
+
 let materiasCursando = [];
 let materiasRegularizadas = [];
 let materiasAprobadas = [];
 
 cargarEstado();
-crearTabla(materias);
+crearTablas(materias);
+
+const reset = document.getElementById('resetButton');
+
+reset.addEventListener('click', function(){
+    localStorage.removeItem('estadoMaterias');
+    eliminarTablas();
+    crearTablas(materias);
+})
