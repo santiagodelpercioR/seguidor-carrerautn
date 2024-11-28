@@ -15,6 +15,7 @@ function crearTabla(materias) {
         filtrar(materias, 5)
     ];
     const anios = materiasPorAnio.length;
+    const main = document.createElement('main');
 
     // Recorre el for 1 vez por año
     materiasPorAnio.forEach((materiasDelAnio, index) => {
@@ -72,7 +73,8 @@ function crearTabla(materias) {
 
         table.appendChild(tableBody);
         table.setAttribute("border", "1");
-        document.body.appendChild(table);
+        main.appendChild(table);
+        document.body.appendChild(main);
     });
 }
 

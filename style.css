@@ -1,6 +1,6 @@
 body{
-    background-color: #ffffff;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px; 
@@ -8,20 +8,43 @@ body{
     padding: 20px;
     font-family: "Verdana", "Courier New", monospace;
     font-weight: bold;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(17,119,180,0.9192051820728291) 44%, rgba(0,31,255,1) 100%);
 }
 
+header{
+    padding: 3px;
+    text-align: center;
+    background-color: rgba(239, 239, 249, 0.154);
+    border-radius: 5px;
+    border: 0.1px none rgb(209, 209, 243);
+    color: white;
+    font-size: 10px;
+    text-align: left;
+    padding-left: 25px;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
 table {
     width: 450px;
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color:transparent;
+    border-radius: 10px;
     font-size: 13px;
     border: 1px solid #756f6f2d;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 9px
 }
 
 table tbody {
     text-align: left;
-    background-color: #a8a6a6;
+    background-color: transparent;
+    border-radius: 10px;
 }
 
 tr{
@@ -31,7 +54,7 @@ tr{
 }
 
 tr.materia td{
-    background-color: #a8a6a6;
+    background-color: transparent;
 }
 
 td {
